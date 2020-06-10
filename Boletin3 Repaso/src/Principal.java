@@ -2,10 +2,11 @@ import java.util.Scanner;
 
 public class Principal {
 
-
+	private static Discoteca discoteka;
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		discoteka = new Discoteca();
 		
 		Cliente miCliente = new Cliente("12345", "pedro");
 		miCliente.setFechaNacimiento("23-11-2000");
@@ -13,13 +14,12 @@ public class Principal {
 		miClienteDos.setFechaNacimiento("22-11-2001");
 		Cliente miClienteTres = new Cliente("32145", "alberto");
 		miClienteTres.setFechaNacimiento("23-11-2002");
-//		mostrarMenu();
-		Discoteca miDiscoteca = new Discoteca();
-		miDiscoteca.anhadirCliente(miCliente);
-		miDiscoteca.anhadirCliente(miClienteDos);
-		miDiscoteca.anhadirCliente(miClienteTres);
+
+		discoteka.anhadirCliente(miCliente);
+		discoteka.anhadirCliente(miClienteDos);
+		discoteka.anhadirCliente(miClienteTres);
 		
-		System.out.println(miDiscoteca);
+		mostrarMenu();
 	}
 	
 	public static void mostrarMenu() {
@@ -51,13 +51,24 @@ public class Principal {
 		switch(opcion) {
 		
 			case 1:
-				Cliente c1 = Cliente.guardarCliente();
-				System.out.println("Cliente guardado correctamente.");
+				Cliente c1 = Cliente.guardaCliente();
+				if (c1 != null) {
+					discoteka.anhadirCliente(c1);
+					System.out.println("Cliente guardado correctamente.");
+				}
 				break;
 			case 2:
-				System.out.println("");
+				System.out.print("Introduce el dni por el que quieres buscar: ");
+				String dni = sc.next();
+				Cliente c2 = discoteka.encontrarDni(dni);
+				if ( c2 != null) {
+					System.out.println("Cliente encontrado: " + c2);
+				}else {
+					System.out.println("Cliente no encontrado");
+				}
 				break;
 			case 3:
+				System.out.println(discoteka);
 				break;
 			case 0:
 				System.out.println("Saliendo del menu.");
@@ -67,7 +78,6 @@ public class Principal {
 				System.out.println("Opcion Invalida.");
 				break;
 			
-		
 		}
 	
 	}

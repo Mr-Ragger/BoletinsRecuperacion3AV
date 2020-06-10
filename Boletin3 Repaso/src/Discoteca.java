@@ -6,9 +6,21 @@ import java.util.HashMap;
 
 public class Discoteca {
 
-	private static final int EDAD_MINIMA = 16;
-	private static final int EDAD_JOVEN = 18;
-	private static final int EDAD_ADULTO= 30;
+	public static final int EDAD_MINIMA = 16;
+	public static final int EDAD_JOVEN = 18;
+	public static final int EDAD_ADULTO= 30;
+	
+	public static boolean comprobarEdad(LocalDate fechaNaci) {
+		int edad;
+		edad = Period.between(fechaNaci, LocalDate.now()).getYears();
+		
+		if(edad >= EDAD_MINIMA) {
+			return true;
+		}
+				
+		return false;
+	}
+	
 	
 	private ArrayList <Cliente> adolescentes;
 	private ArrayList <Cliente> jovenes;
@@ -22,17 +34,6 @@ public class Discoteca {
 		clientes = new HashMap<String, Cliente>();
 	}
 
-	public boolean comprobarCliente(LocalDate fechaNaci) {
-		int edad;
-		edad = Period.between(fechaNaci, LocalDate.now()).getYears();
-		
-		if(edad >= EDAD_MINIMA) {
-			return true;
-		}
-				
-		return false;
-	}
-	
 	public void anhadirCliente(Cliente c) {
 		
 		if(c.getEdad() > EDAD_ADULTO) {
@@ -44,6 +45,10 @@ public class Discoteca {
 		}
 		
 		clientes.put(c.getDni(), c);
+	}
+	
+	public Cliente encontrarDni(String dni) {
+		return clientes.get(dni);
 	}
 	
 	public String toString() {

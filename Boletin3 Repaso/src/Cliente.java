@@ -6,27 +6,33 @@ import java.util.Scanner;
 
 public class Cliente implements Comparable<Cliente>{
 
-	public static Cliente guardarCliente() {
-		@SuppressWarnings("resource")
+	public static Cliente guardaCliente() {
+        @SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		String dni, nombre, fecha;
-		
-		System.out.print("Introduce el Nombre: ");
-		nombre = sc.next();
-		
-		System.out.print("Introduce el DNI: ");
-		dni = sc.next();
-		
-		Cliente miCliente = new Cliente(dni, nombre);
-		do {
-			System.out.print("Intoduce la fecha de nacimiento(dd-mm-yyyy): ");
-			fecha = sc.next();
-					
-		} while(!miCliente.setFechaNacimiento(fecha));
-				
-		return miCliente;
-	}
-	
+        Cliente miCliente = new Cliente("", "");
+        String dni, nombre, fechaNaci;
+        
+        do{
+            System.out.print("Insterta fecha nacimiento (con formato dd-MM-yyy): ");
+            fechaNaci = sc.next();
+        } while(!miCliente.setFechaNacimiento(fechaNaci));
+        
+        if (!Discoteca.comprobarEdad(miCliente.getFechaNaci())) {
+            System.out.println("Error, edad incorrecta :(");
+            return null;
+        }
+        
+        System.out.print("Insterta dni: ");
+        dni = sc.next();
+        miCliente.setDni(dni);
+        
+        System.out.print("Insterta nombre: ");
+        nombre = sc.next();
+        miCliente.setNombre(nombre);
+        
+        return miCliente;
+    }
+ 		
 	private String dni;
 	private String nombre;
 	private LocalDate fechaNaci;
