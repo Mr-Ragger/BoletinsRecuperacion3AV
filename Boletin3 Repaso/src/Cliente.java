@@ -97,7 +97,7 @@ public class Cliente implements Comparable<Cliente>{
 	@Override
 	public int compareTo(Cliente c) {
 		
-		int cmp = (this.fechaNaci.getYear() - c.getFechaNaci().getYear());
+	    int cmp = (this.fechaNaci.getYear() - c.getFechaNaci().getYear());
 	    if (cmp == 0) {
 	        cmp = (this.fechaNaci.getMonthValue() - c.getFechaNaci().getMonthValue());
 	        if (cmp == 0) {
