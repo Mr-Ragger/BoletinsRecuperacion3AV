@@ -1,9 +1,10 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
 
 	public static Cliente guardarCliente() {
 		@SuppressWarnings("resource")
@@ -65,7 +66,10 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 	
-
+	public int getEdad() {
+		return Period.between(fechaNaci, LocalDate.now()).getYears();	
+	}
+	
 	public boolean setFechaNacimiento(String fechaNacimiento) {
 		DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -82,6 +86,19 @@ public class Cliente {
 
 	public String toString() {
 		return "DNI: " + dni + " Nombre: " + nombre + " Fecha de nacimiento: " + fechaNaci;
+	}
+
+	@Override
+	public int compareTo(Cliente c) {
+		
+		int cmp = (this.fechaNaci.getYear() - c.getFechaNaci().getYear());
+	    if (cmp == 0) {
+	        cmp = (this.fechaNaci.getMonthValue() - c.getFechaNaci().getMonthValue());
+	        if (cmp == 0) {
+	            cmp = (this.fechaNaci.getDayOfMonth() - c.getFechaNaci().getDayOfMonth());
+	        }
+	    }
+	    return cmp;
 	}
 	
 

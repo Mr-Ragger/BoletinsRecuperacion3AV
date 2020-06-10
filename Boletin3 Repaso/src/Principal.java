@@ -7,14 +7,19 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Cliente prueba;
+		Cliente miCliente = new Cliente("12345", "pedro");
+		miCliente.setFechaNacimiento("23-11-2000");
+		Cliente miClienteDos = new Cliente("21345", "juan");
+		miClienteDos.setFechaNacimiento("22-11-2001");
+		Cliente miClienteTres = new Cliente("32145", "alberto");
+		miClienteTres.setFechaNacimiento("23-11-2002");
+//		mostrarMenu();
+		Discoteca miDiscoteca = new Discoteca();
+		miDiscoteca.anhadirCliente(miCliente);
+		miDiscoteca.anhadirCliente(miClienteDos);
+		miDiscoteca.anhadirCliente(miClienteTres);
 		
-		prueba = Cliente.guardarCliente();
-//		Cliente miCliente = new Cliente();
-		System.out.println( prueba );
-		
-		mostrarMenu();
-		
+		System.out.println(miDiscoteca);
 	}
 	
 	public static void mostrarMenu() {
@@ -23,10 +28,9 @@ public class Principal {
 		int opcionMenu;
 		
 		String menu = "----------MENU DE OPCIONES---------- \n"
-				+ "- 1.. \n"
-				+ "- 2.. \n"
-				+ "- 3.. \n"
-				+ "- 4.. \n"
+				+ "- 1.Añadir cliente. \n"
+				+ "- 2.Ver datos por DNI. \n"
+				+ "- 3.Mostrar registro de clientes. \n"
 				+ "- 0.Salir. \n";
 		
 		System.out.println(menu);
@@ -51,10 +55,9 @@ public class Principal {
 				System.out.println("Cliente guardado correctamente.");
 				break;
 			case 2:
-				System.out.println("Mostrando libros");
+				System.out.println("");
 				break;
 			case 3:
-
 				break;
 			case 0:
 				System.out.println("Saliendo del menu.");
